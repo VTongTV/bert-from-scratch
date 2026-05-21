@@ -17,3 +17,7 @@ class BertConfig:
 
 def bert_base_config():
     return BertConfig(L=12, H=768, A=12)
+
+
+def bert_large_config():
+    return BertConfig(L=24, H=1024, A=16)
