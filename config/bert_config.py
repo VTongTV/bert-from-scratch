@@ -13,3 +13,7 @@ class BertConfig:
 
     def __post_init__(self):
         self.d_ff = 4 * self.H
+
+
+def bert_base_config():
+    return BertConfig(L=12, H=768, A=12)
