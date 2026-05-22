@@ -7,7 +7,8 @@ INITIATION_PROMPT.md
 __pycache__/
 *.pyc
 .venv/
-data/
+data/corpus/
+data/raw/
 datasets/
 checkpoints/
 outputs/

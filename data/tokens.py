@@ -1,0 +1,7 @@
+CLS = "[CLS]"
+SEP = "[SEP]"
+MASK = "[MASK]"
+PAD = "[PAD]"
+UNK = "[UNK]"
+
+SPECIAL_TOKENS = [PAD, UNK, CLS, SEP, MASK]
