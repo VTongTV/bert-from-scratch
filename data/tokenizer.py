@@ -73,3 +73,17 @@ class WordPieceTokenizer:
         segment_ids = [0] * (len(tokens_a) + 2) + [1] * (len(tokens_b) + 1)
         ids = [self.vocab.get_id(t) for t in tokens]
         return ids, segment_ids
+
+    def decode(self, ids):
+        tokens = [self.vocab.get_token(i) for i in ids]
+        text = ""
+        for tok in tokens:
+            if tok.startswith("##"):
+                text += tok[2:]
+            elif tok in (CLS, SEP):
+                continue
+            else:
+                if text:
+                    text += " "
+                text += tok
+        return text
