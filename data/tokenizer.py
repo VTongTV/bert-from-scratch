@@ -19,6 +19,9 @@ class WordPieceTokenizer:
     def _wordpiece(self, word):
         if word in self.vocab:
             return [word]
+        return self._greedy_longest_match(word)
+
+    def _greedy_longest_match(self, word):
         tokens = []
         start = 0
         while start < len(word):
