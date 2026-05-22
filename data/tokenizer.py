@@ -59,3 +59,17 @@ class WordPieceTokenizer:
         tokens = [CLS] + tokens[:max_len - 2] + [SEP]
         ids = [self.vocab.get_id(t) for t in tokens]
         return ids
+
+    def encode_pair(self, text_a, text_b, max_len=512):
+        tokens_a = self.tokenize(text_a)
+        tokens_b = self.tokenize(text_b)
+        max_tokens = max_len - 3
+        while len(tokens_a) + len(tokens_b) > max_tokens:
+            if len(tokens_a) > len(tokens_b):
+                tokens_a.pop()
+            else:
+                tokens_b.pop()
+        tokens = [CLS] + tokens_a + [SEP] + tokens_b + [SEP]
+        segment_ids = [0] * (len(tokens_a) + 2) + [1] * (len(tokens_b) + 1)
+        ids = [self.vocab.get_id(t) for t in tokens]
+        return ids, segment_ids
