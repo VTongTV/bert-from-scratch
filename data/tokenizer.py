@@ -42,3 +42,14 @@ class WordPieceTokenizer:
             else:
                 start = end
         return tokens
+
+    def _segment_subwords(self, text):
+        words = text.strip().split()
+        all_subwords = []
+        for word in words:
+            subwords = self._wordpiece(word)
+            for i, sw in enumerate(subwords):
+                if i > 0 and not sw.startswith("##") and sw != UNK:
+                    subwords[i] = "##" + sw
+            all_subwords.extend(subwords)
+        return all_subwords
