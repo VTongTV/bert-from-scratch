@@ -53,3 +53,9 @@ class WordPieceTokenizer:
                     subwords[i] = "##" + sw
             all_subwords.extend(subwords)
         return all_subwords
+
+    def encode(self, text, max_len=512):
+        tokens = self.tokenize(text)
+        tokens = [CLS] + tokens[:max_len - 2] + [SEP]
+        ids = [self.vocab.get_id(t) for t in tokens]
+        return ids
