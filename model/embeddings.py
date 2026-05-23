@@ -18,3 +18,12 @@ class SegmentEmbedding(nn.Module):
 
     def forward(self, segment_ids):
         return self.embedding(segment_ids)
+
+
+class PositionEmbedding(nn.Module):
+    def __init__(self, max_len, H):
+        super().__init__()
+        self.embedding = nn.Embedding(max_len, H)
+
+    def forward(self, position_ids):
+        return self.embedding(position_ids)
