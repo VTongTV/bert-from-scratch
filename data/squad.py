@@ -43,3 +43,28 @@ def extract_spans(context, answer_text, answer_start, tokenizer):
     if token_end is None:
         token_end = 0
     return token_start, token_end
+
+
+def squad_to_features(examples, tokenizer, max_len=384, doc_stride=128):
+    features = []
+    for ex in examples:
+        ids, segment_ids = tokenizer.encode_pair(ex["question"], ex["context"], max_len)
+        start_position = 0
+        end_position = 0
+        if ex["answers"]:
+            ans = ex["answers"][0]
+            start_position, end_position = extract_spans(
+                ex["context"], ans["text"], ans["start"], tokenizer
+            )
+            start_position += len(tokenizer.tokenize(ex["question"])) + 2
+            end_position += len(tokenizer.tokenize(ex["question"])) + 2
+        attention_mask = [1] * len(ids)
+        features.append({
+            "id": ex["id"],
+            "input_ids": ids,
+            "segment_ids": segment_ids,
+            "attention_mask": attention_mask,
+            "start_position": start_position,
+            "end_position": end_position,
+        })
+    return features
