@@ -1,5 +1,8 @@
 import json
 
+import torch
+from torch.utils.data import Dataset
+
 
 class SquadReader:
     def read(self, filepath):
@@ -68,3 +71,21 @@ def squad_to_features(examples, tokenizer, max_len=384, doc_stride=128):
             "end_position": end_position,
         })
     return features
+
+
+class SquadDataset(Dataset):
+    def __init__(self, features):
+        self.features = features
+
+    def __len__(self):
+        return len(self.features)
+
+    def __getitem__(self, idx):
+        f = self.features[idx]
+        return {
+            "input_ids": torch.tensor(f["input_ids"], dtype=torch.long),
+            "segment_ids": torch.tensor(f["segment_ids"], dtype=torch.long),
+            "attention_mask": torch.tensor(f["attention_mask"], dtype=torch.long),
+            "start_position": torch.tensor(f["start_position"], dtype=torch.long),
+            "end_position": torch.tensor(f["end_position"], dtype=torch.long),
+        }
