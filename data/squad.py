@@ -25,3 +25,21 @@ class SquadReader:
                         "answers": answers,
                     })
         return examples
+
+
+def extract_spans(context, answer_text, answer_start, tokenizer):
+    context_tokens = context.split()
+    char_idx = 0
+    token_start = None
+    token_end = None
+    for i, token in enumerate(context_tokens):
+        if char_idx == answer_start:
+            token_start = i
+        char_idx += len(token) + 1
+        if char_idx >= answer_start + len(answer_text) and token_end is None:
+            token_end = i
+    if token_start is None:
+        token_start = 0
+    if token_end is None:
+        token_end = 0
+    return token_start, token_end
