@@ -51,3 +51,13 @@ def test_causal_mask():
     assert mask[0, 0, 0, 0] == 1
     assert mask[0, 0, 0, 1] == 0
     assert mask[0, 0, 1, 0] == 1
+
+
+def test_attention_no_nans():
+    B, A, S, d_k = 2, 4, 8, 16
+    Q = torch.randn(B, A, S, d_k) * 100
+    K = torch.randn(B, A, S, d_k) * 100
+    V = torch.randn(B, A, S, d_k)
+    out = scaled_dot_product_attention(Q, K, V)
+    assert not torch.isnan(out).any()
+    assert not torch.isinf(out).any()
