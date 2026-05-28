@@ -25,3 +25,8 @@ class AttentionDropout(nn.Module):
 
     def forward(self, attn_weights):
         return self.dropout(attn_weights)
+
+
+def compute_attention_scores(Q, K):
+    d_k = Q.size(-1)
+    return torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)
