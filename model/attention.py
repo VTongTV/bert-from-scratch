@@ -66,3 +66,14 @@ class MultiHeadAttention(nn.Module):
         context = torch.matmul(attn_weights, V)
         context = context.transpose(1, 2).contiguous().view(B, S, H)
         return self.out_dropout(self.W_O(context))
+
+
+def split_heads(x, A):
+    B, S, H = x.size()
+    d_k = H // A
+    return x.view(B, S, A, d_k).transpose(1, 2)
+
+
+def merge_heads(x):
+    B, A, S, d_k = x.size()
+    return x.transpose(1, 2).contiguous().view(B, S, A * d_k)
