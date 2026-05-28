@@ -11,3 +11,7 @@ def scaled_dot_product_attention(Q, K, V, mask=None):
         scores = scores.masked_fill(mask == 0, -1e9)
     attn = F.softmax(scores, dim=-1)
     return torch.matmul(attn, V)
+
+
+def apply_attention_mask(scores, mask):
+    return scores.masked_fill(mask == 0, -1e9)
