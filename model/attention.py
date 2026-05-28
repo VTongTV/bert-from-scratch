@@ -77,3 +77,7 @@ def split_heads(x, A):
 def merge_heads(x):
     B, A, S, d_k = x.size()
     return x.transpose(1, 2).contiguous().view(B, S, A * d_k)
+
+
+def create_causal_mask(seq_len, device="cpu"):
+    return torch.tril(torch.ones(seq_len, seq_len, device=device)).unsqueeze(0).unsqueeze(0)
