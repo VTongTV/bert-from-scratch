@@ -30,3 +30,12 @@ class AttentionDropout(nn.Module):
 def compute_attention_scores(Q, K):
     d_k = Q.size(-1)
     return torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)
+
+
+class AttentionOutputProjection(nn.Module):
+    def __init__(self, H):
+        super().__init__()
+        self.linear = nn.Linear(H, H)
+
+    def forward(self, x):
+        return self.linear(x)
