@@ -39,3 +39,30 @@ class AttentionOutputProjection(nn.Module):
 
     def forward(self, x):
         return self.linear(x)
+
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self, H, A, P_drop=0.1):
+        super().__init__()
+        self.A = A
+        self.d_k = H // A
+        self.W_Q = nn.Linear(H, H)
+        self.W_K = nn.Linear(H, H)
+        self.W_V = nn.Linear(H, H)
+        self.W_O = nn.Linear(H, H)
+        self.attn_dropout = nn.Dropout(P_drop)
+        self.out_dropout = nn.Dropout(P_drop)
+
+    def forward(self, x, mask=None):
+        B, S, H = x.size()
+        Q = self.W_Q(x).view(B, S, self.A, self.d_k).transpose(1, 2)
+        K = self.W_K(x).view(B, S, self.A, self.d_k).transpose(1, 2)
+        V = self.W_V(x).view(B, S, self.A, self.d_k).transpose(1, 2)
+        scores = compute_attention_scores(Q, K)
+        if mask is not None:
+            scores = apply_attention_mask(scores, mask)
+        attn_weights = F.softmax(scores, dim=-1)
+        attn_weights = self.attn_dropout(attn_weights)
+        context = torch.matmul(attn_weights, V)
+        context = context.transpose(1, 2).contiguous().view(B, S, H)
+        return self.out_dropout(self.W_O(context))
