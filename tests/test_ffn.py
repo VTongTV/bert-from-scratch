@@ -49,3 +49,12 @@ def test_layer_norm_stability():
     out = ln(x)
     assert not torch.isnan(out).any()
     assert out.std() < x.std()
+
+
+def test_gelu_gradient():
+    gelu = GELU()
+    x = torch.randn(4, requires_grad=True)
+    out = gelu(x)
+    out.sum().backward()
+    assert x.grad is not None
+    assert not torch.isnan(x.grad).any()
