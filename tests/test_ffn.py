@@ -40,3 +40,12 @@ def test_dropout_wrapper():
     dw.train()
     out = dw(x)
     assert out.shape == x.shape
+
+
+def test_layer_norm_stability():
+    H = 64
+    ln = LayerNorm(H)
+    x = torch.randn(2, 8, H) * 100
+    out = ln(x)
+    assert not torch.isnan(out).any()
+    assert out.std() < x.std()
