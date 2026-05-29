@@ -20,3 +20,12 @@ class PositionWiseFFN(nn.Module):
 
     def forward(self, x):
         return self.dropout(self.fc2(self.gelu(self.fc1(x))))
+
+
+class LayerNorm(nn.Module):
+    def __init__(self, H, eps=1e-12):
+        super().__init__()
+        self.norm = nn.LayerNorm(H, eps=eps)
+
+    def forward(self, x):
+        return self.norm(x)
