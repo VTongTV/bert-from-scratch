@@ -58,3 +58,12 @@ def test_gelu_gradient():
     out.sum().backward()
     assert x.grad is not None
     assert not torch.isnan(x.grad).any()
+
+
+def test_residual_gradient():
+    H = 64
+    res = ResidualConnection(H)
+    x = torch.randn(2, 8, H, requires_grad=True)
+    out = res(x, lambda x: x * 0.5)
+    out.sum().backward()
+    assert x.grad is not None
