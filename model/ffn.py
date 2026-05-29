@@ -8,3 +8,15 @@ import torch.nn.functional as F
 class GELU(nn.Module):
     def forward(self, x):
         return F.gelu(x)
+
+
+class PositionWiseFFN(nn.Module):
+    def __init__(self, H, d_ff, P_drop=0.1):
+        super().__init__()
+        self.fc1 = nn.Linear(H, d_ff)
+        self.fc2 = nn.Linear(d_ff, H)
+        self.gelu = GELU()
+        self.dropout = nn.Dropout(P_drop)
+
+    def forward(self, x):
+        return self.dropout(self.fc2(self.gelu(self.fc1(x))))
