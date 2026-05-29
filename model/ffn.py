@@ -29,3 +29,12 @@ class LayerNorm(nn.Module):
 
     def forward(self, x):
         return self.norm(x)
+
+
+class ResidualConnection(nn.Module):
+    def __init__(self, H, eps=1e-12):
+        super().__init__()
+        self.norm = LayerNorm(H, eps)
+
+    def forward(self, x, sublayer):
+        return x + sublayer(self.norm(x))
