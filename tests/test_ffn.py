@@ -67,3 +67,12 @@ def test_residual_gradient():
     out = res(x, lambda x: x * 0.5)
     out.sum().backward()
     assert x.grad is not None
+
+
+def test_ffn_numerical_stability():
+    H, d_ff = 64, 256
+    ffn = PositionWiseFFN(H, d_ff)
+    x = torch.randn(2, 8, H) * 10
+    out = ffn(x)
+    assert not torch.isnan(out).any()
+    assert not torch.isinf(out).any()
