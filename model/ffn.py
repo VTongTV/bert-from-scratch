@@ -38,3 +38,12 @@ class ResidualConnection(nn.Module):
 
     def forward(self, x, sublayer):
         return x + sublayer(self.norm(x))
+
+
+class DropoutWrapper(nn.Module):
+    def __init__(self, P_drop=0.1):
+        super().__init__()
+        self.dropout = nn.Dropout(P_drop)
+
+    def forward(self, x):
+        return self.dropout(x)
