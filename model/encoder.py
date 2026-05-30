@@ -30,3 +30,7 @@ class TransformerEncoderLayer(nn.Module):
     def feed_forward_sublayer(self, x):
         ffn_out = self.ffn(x)
         return self.ffn_norm(x + self.ffn_dropout(ffn_out))
+
+
+def post_layer_norm(x, sublayer_out, norm, dropout):
+    return norm(x + dropout(sublayer_out))
