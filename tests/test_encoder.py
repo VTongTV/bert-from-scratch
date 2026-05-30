@@ -44,3 +44,11 @@ def test_encoder_layer_hidden_state():
     x = torch.randn(2, 8, H)
     hidden = layer(x)
     assert hidden.shape == (2, 8, H)
+
+
+def test_encoder_layer_config():
+    H, A, d_ff = 64, 4, 256
+    layer = TransformerEncoderLayer(H, A, d_ff)
+    assert layer.H == H
+    assert layer.A == A
+    assert layer.d_ff == d_ff
