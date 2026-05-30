@@ -16,8 +16,14 @@ class TransformerEncoderLayer(nn.Module):
         self.ffn_dropout = nn.Dropout(P_drop)
 
     def forward(self, x, mask=None):
-        attn_out = self.attention(x, mask)
-        x = self.attn_norm(x + self.attn_dropout(attn_out))
-        ffn_out = self.ffn(x)
-        x = self.ffn_norm(x + self.ffn_dropout(ffn_out))
+        x = self.self_attention_sublayer(x, mask)
+        x = self.feed_forward_sublayer(x)
         return x
+
+    def self_attention_sublayer(self, x, mask=None):
+        attn_out = self.attention(x, mask)
+        return self.attn_norm(x + self.attn_dropout(attn_out))
+
+    def feed_forward_sublayer(self, x):
+        ffn_out = self.ffn(x)
+        return self.ffn_norm(x + self.ffn_dropout(ffn_out))
