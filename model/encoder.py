@@ -8,6 +8,9 @@ from model.ffn import PositionWiseFFN, LayerNorm
 class TransformerEncoderLayer(nn.Module):
     def __init__(self, H, A, d_ff, P_drop=0.1):
         super().__init__()
+        self.H = H
+        self.A = A
+        self.d_ff = d_ff
         self.attention = MultiHeadAttention(H, A, P_drop)
         self.attn_norm = LayerNorm(H)
         self.ffn = PositionWiseFFN(H, d_ff, P_drop)
