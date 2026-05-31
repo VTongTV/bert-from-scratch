@@ -45,3 +45,19 @@ def test_count_parameters():
     model = BertModel(config)
     n = count_parameters(model)
     assert n > 0
+
+
+def test_bert_integration():
+    config = BertConfig(L=2, H=64, A=4, V=100, max_len=32)
+    model = BertModel(config)
+    model.apply(init_bert_weights)
+    input_ids = torch.randint(0, 100, (2, 16))
+    segment_ids = torch.randint(0, 2, (2, 16))
+    attention_mask = torch.ones(2, 16)
+    encoder_out, pooled_out = model(input_ids, segment_ids, attention_mask)
+    assert encoder_out.shape == (2, 16, 64)
+    assert pooled_out.shape == (2, 64)
+    assert not torch.isnan(encoder_out).any()
+    assert not torch.isnan(pooled_out).any()
+    loss = pooled_out.sum()
+    loss.backward()
