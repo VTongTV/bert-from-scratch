@@ -60,7 +60,11 @@ def init_bert_weights(module):
     if isinstance(module, nn.Linear):
         nn.init.normal_(module.weight, mean=0.0, std=0.02)
         if module.bias is not None:
-            nn.init.zeros_(module.bias)
+        nn.init.zeros_(module.bias)
+
+
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
     elif isinstance(module, nn.Embedding):
         nn.init.normal_(module.weight, mean=0.0, std=0.02)
     elif isinstance(module, nn.LayerNorm):
