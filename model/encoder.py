@@ -35,3 +35,16 @@ class TransformerEncoderLayer(nn.Module):
 
 def post_layer_norm(x, sublayer_out, norm, dropout):
     return norm(x + dropout(sublayer_out))
+
+
+class BertEncoder(nn.Module):
+    def __init__(self, L, H, A, d_ff, P_drop=0.1):
+        super().__init__()
+        self.layer = nn.ModuleList([
+            TransformerEncoderLayer(H, A, d_ff, P_drop) for _ in range(L)
+        ])
+
+    def forward(self, x, mask=None):
+        for layer in self.layer:
+            x = layer(x, mask)
+        return x
