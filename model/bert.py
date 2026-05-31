@@ -33,3 +33,24 @@ class BertModel(nn.Module):
             x = layer(x, attention_mask)
             all_hidden.append(x)
         return all_hidden
+
+    def get_attention_weights(self, input_ids, segment_ids=None, attention_mask=None):
+        if attention_mask is not None:
+            attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
+        embedding_output = self.embeddings(input_ids, segment_ids)
+        all_attn = []
+        x = embedding_output
+        for layer in self.encoder.layer:
+            Q = layer.attention.W_Q(x)
+            K = layer.attention.W_K(x)
+            from model.attention import compute_attention_scores, split_heads
+            B, S, H = Q.size()
+            A = layer.attention.A
+            Q = split_heads(Q, A)
+            K = split_heads(K, A)
+            scores = compute_attention_scores(Q, K)
+            import torch.nn.functional as F
+            attn = F.softmax(scores, dim=-1)
+            all_attn.append(attn)
+            x = layer(x, attention_mask)
+        return all_attn
