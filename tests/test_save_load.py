@@ -29,3 +29,14 @@ def test_model_save_load():
         out2 = model2(input_ids)
         os.unlink(f.name)
     assert torch.allclose(out1[0], out2[0], atol=1e-5)
+
+
+def test_config_serialization():
+    config = BertConfig(L=2, H=64, A=4, V=100, max_len=32)
+    with tempfile.NamedTemporaryFile(suffix=".json", delete=False, mode="w") as f:
+        save_config(config, f.name)
+        loaded = load_config(f.name)
+        os.unlink(f.name)
+    assert loaded.L == config.L
+    assert loaded.H == config.H
+    assert loaded.A == config.A
