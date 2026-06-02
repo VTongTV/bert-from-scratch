@@ -21,22 +21,28 @@ def test_model_save_load():
     model.eval()
     input_ids = torch.randint(0, 100, (2, 8))
     out1 = model(input_ids)
-    with tempfile.NamedTemporaryFile(suffix=".pt", delete=False) as f:
-        save_model(model, f.name)
+    path = os.path.join(tempfile.gettempdir(), "test_bert.pt")
+    try:
+        save_model(model, path)
         model2 = BertModel(config)
-        load_model(model2, f.name)
+        load_model(model2, path)
         model2.eval()
         out2 = model2(input_ids)
-        os.unlink(f.name)
+    finally:
+        if os.path.exists(path):
+            os.unlink(path)
     assert torch.allclose(out1[0], out2[0], atol=1e-5)
 
 
 def test_config_serialization():
     config = BertConfig(L=2, H=64, A=4, V=100, max_len=32)
-    with tempfile.NamedTemporaryFile(suffix=".json", delete=False, mode="w") as f:
-        save_config(config, f.name)
-        loaded = load_config(f.name)
-        os.unlink(f.name)
+    path = os.path.join(tempfile.gettempdir(), "test_config.json")
+    try:
+        save_config(config, path)
+        loaded = load_config(path)
+    finally:
+        if os.path.exists(path):
+            os.unlink(path)
     assert loaded.L == config.L
     assert loaded.H == config.H
     assert loaded.A == config.A
