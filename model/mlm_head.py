@@ -29,3 +29,24 @@ class MLMDecoder(nn.Module):
 
     def tie_weights(self, word_embeddings):
         self.decoder.weight = word_embeddings.weight
+
+
+class MLMPrediction(nn.Module):
+    def __init__(self, H, V):
+        super().__init__()
+        self.head = MLMHead(H)
+        self.decoder = MLMDecoder(H, V)
+
+    def forward(self, hidden_states):
+        x = self.head(hidden_states)
+        x = self.decoder(x)
+        return x
+
+    def tie_weights(self, word_embeddings):
+        self.decoder.tie_weights(word_embeddings)
+
+
+def mlm_loss(logits, labels, mask):
+    loss = F.cross_entropy(logits.view(-1, logits.size(-1)), labels.view(-1), reduction="none")
+    loss = loss.view(labels.size())
+    return (loss * mask).sum() / mask.sum()
