@@ -22,8 +22,10 @@ class MLMHead(nn.Module):
 class MLMDecoder(nn.Module):
     def __init__(self, H, V):
         super().__init__()
-        self.bias = nn.Parameter(torch.zeros(V))
+        self.decoder = nn.Linear(H, V, bias=True)
 
-    def forward(self, hidden_states, word_embeddings):
-        x = F.linear(hidden_states, word_embeddings.weight, self.bias)
-        return x
+    def forward(self, hidden_states):
+        return self.decoder(hidden_states)
+
+    def tie_weights(self, word_embeddings):
+        self.decoder.weight = word_embeddings.weight
