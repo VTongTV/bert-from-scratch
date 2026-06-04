@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 from model.ffn import GELU, LayerNorm
 
@@ -15,4 +16,14 @@ class MLMHead(nn.Module):
         x = self.dense(hidden_states)
         x = self.gelu(x)
         x = self.layer_norm(x)
+        return x
+
+
+class MLMDecoder(nn.Module):
+    def __init__(self, H, V):
+        super().__init__()
+        self.bias = nn.Parameter(torch.zeros(V))
+
+    def forward(self, hidden_states, word_embeddings):
+        x = F.linear(hidden_states, word_embeddings.weight, self.bias)
         return x
