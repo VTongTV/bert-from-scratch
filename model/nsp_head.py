@@ -14,3 +14,8 @@ class NSPHead(nn.Module):
 
 def nsp_loss(logits, labels):
     return F.cross_entropy(logits, labels)
+
+
+def nsp_accuracy(logits, labels):
+    preds = logits.argmax(dim=-1)
+    return (preds == labels).float().mean()
