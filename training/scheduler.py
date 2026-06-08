@@ -24,3 +24,9 @@ class WarmupLinearScheduler:
 
     def get_lr(self):
         return [pg["lr"] for pg in self.optimizer.param_groups]
+
+    def state_dict(self):
+        return {"current_step": self.current_step}
+
+    def load_state_dict(self, state):
+        self.current_step = state["current_step"]
