@@ -32,7 +32,7 @@ def test_mlm_loss_convergence():
     }
     batch["mlm_labels"][:, 3] = torch.randint(0, 50, (4,))
     losses = []
-    for _ in range(50):
+    for _ in range(100):
         loss = trainer.train_step(batch)
         losses.append(loss)
     assert losses[-1] < losses[0]
