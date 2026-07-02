@@ -116,4 +116,67 @@
   <line x1="1130" y1="296" x2="1130" y2="310" stroke="#C62828" stroke-width="1.5"/>
   <!-- BERT_LARGE note -->
   <text x="820" y="568" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">BERT_LARGE: L=24, H=1024, A=16, ~340M params</text>
+  <!-- ANIMATIONS: ripcord pull — data token cascades through layers -->
+  <!-- Traveling data packet from embeddings to encoder output -->
+  <circle id="enc-pkt" r="8" fill="#C62828" filter="url(#enc-glow)" opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.85;1" dur="8s" repeatCount="indefinite"/>
+    <animateMotion path="M160,128 L390,122 L390,424 L630,424 L630,122 L700,148 L880,148" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Layer ignition: each layer flashes red as data passes through -->
+  <rect x="320" y="100" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="0.4s"/>
+  </rect>
+  <rect x="320" y="156" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="0.8s"/>
+  </rect>
+  <rect x="320" y="212" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="1.2s"/>
+  </rect>
+  <rect x="320" y="268" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="1.6s"/>
+  </rect>
+  <rect x="320" y="324" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="2.0s"/>
+  </rect>
+  <rect x="320" y="380" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="2.4s"/>
+  </rect>
+  <rect x="560" y="100" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="2.8s"/>
+  </rect>
+  <rect x="560" y="156" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="3.2s"/>
+  </rect>
+  <rect x="560" y="212" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="3.6s"/>
+  </rect>
+  <rect x="560" y="268" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="4.0s"/>
+  </rect>
+  <rect x="560" y="324" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="4.4s"/>
+  </rect>
+  <rect x="560" y="380" width="140" height="44" rx="4" fill="#C62828" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.06;0.12" dur="8s" repeatCount="indefinite" begin="4.8s"/>
+  </rect>
+  <!-- MLM head ignition -->
+  <rect x="1040" y="100" width="180" height="44" rx="6" fill="#FAFAFA" opacity="0">
+    <animate attributeName="opacity" values="0;0.3;0" keyTimes="0;0.08;0.15" dur="8s" repeatCount="indefinite" begin="5.6s"/>
+  </rect>
+  <!-- NSP head ignition -->
+  <rect x="1040" y="164" width="180" height="44" rx="6" fill="#FAFAFA" opacity="0">
+    <animate attributeName="opacity" values="0;0.3;0" keyTimes="0;0.08;0.15" dur="8s" repeatCount="indefinite" begin="6.0s"/>
+  </rect>
+  <!-- Loss glow pulse -->
+  <rect x="1040" y="244" width="180" height="52" rx="6" fill="#FAFAFA" opacity="0">
+    <animate attributeName="opacity" values="0;0.4;0" keyTimes="0;0.1;0.18" dur="8s" repeatCount="indefinite" begin="6.4s"/>
+  </rect>
+  <!-- Draw-on connector: embeddings to layer 1 -->
+  <line x1="240" y1="128" x2="320" y2="122" stroke="#C62828" stroke-width="2" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+    <animate attributeName="stroke-dashoffset" values="100;0" dur="0.5s" begin="0.2s" repeatCount="indefinite"/>
+  </line>
+  <!-- Draw-on connector: layer 6 to layer 7 -->
+  <line x1="460" y1="402" x2="460" y2="424" stroke="#C62828" stroke-width="2" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+    <animate attributeName="stroke-dashoffset" values="100;0" dur="0.4s" begin="2.6s" repeatCount="indefinite"/>
+  </line>
 </svg>

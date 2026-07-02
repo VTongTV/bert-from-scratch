@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="pt-red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <filter id="pt-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#212121"/>
+  <!-- title -->
+  <rect x="48" y="24" width="1184" height="48" rx="4" fill="#C62828" opacity="0.15"/>
+  <text x="640" y="56" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="bold" fill="#FAFAFA">Pre-training Pipeline — MLM + NSP</text>
+  <!-- legend -->
+  <rect x="48" y="648" width="1184" height="48" rx="4" fill="#424242" opacity="0.4"/>
+  <rect x="72" y="664" width="16" height="16" rx="2" fill="#C62828"/>
+  <text x="96" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Masked token</text>
+  <rect x="240" y="664" width="16" height="16" rx="2" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="264" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Unmasked token</text>
+  <text x="440" y="678" font-family="monospace" font-size="12" fill="#C62828">80% [M] / 10% rand / 10% same</text>
+  <!-- LEFT SIDE: MLM -->
+  <text x="320" y="110" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" fill="#C62828">Task 1: Masked LM</text>
+  <!-- input tokens row -->
+  <text x="80" y="170" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Input:</text>
+  <rect x="140" y="150" width="56" height="32" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="168" y="172" text-anchor="middle" font-family="monospace" font-size="11" fill="#FAFAFA">the</text>
+  <rect x="204" y="150" width="56" height="32" rx="4" fill="#C62828" stroke="#FAFAFA" stroke-width="1.5"/>
+  <text x="232" y="172" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FAFAFA">[M]</text>
+  <rect x="268" y="150" width="56" height="32" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="296" y="172" text-anchor="middle" font-family="monospace" font-size="11" fill="#FAFAFA">sat</text>
+  <rect x="332" y="150" width="56" height="32" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="360" y="172" text-anchor="middle" font-family="monospace" font-size="11" fill="#FAFAFA">on</text>
+  <rect x="396" y="150" width="56" height="32" rx="4" fill="#C62828" stroke="#FAFAFA" stroke-width="1.5"/>
+  <text x="424" y="172" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#FAFAFA">[M]</text>
+  <rect x="460" y="150" width="56" height="32" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="488" y="172" text-anchor="middle" font-family="monospace" font-size="11" fill="#FAFAFA">mat</text>
+  <!-- arrow down -->
+  <line x1="320" y1="190" x2="320" y2="220" stroke="#C62828" stroke-width="2"/>
+  <polygon points="314,218 320,228 326,218" fill="#C62828"/>
+  <!-- BERT encoder block -->
+  <rect x="140" y="228" width="360" height="80" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="320" y="260" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#FAFAFA">BERT Encoder (L=12)</text>
+  <text x="320" y="282" text-anchor="middle" font-family="monospace" font-size="11" fill="#C62828">[B, S, H] → [B, S, H]</text>
+  <!-- arrow down -->
+  <line x1="320" y1="312" x2="320" y2="342" stroke="#C62828" stroke-width="2"/>
+  <polygon points="314,340 320,350 326,340" fill="#C62828"/>
+  <!-- MLM head -->
+  <rect x="160" y="350" width="320" height="60" rx="6" fill="#B71C1C" stroke="#C62828" stroke-width="1.5"/>
+  <text x="320" y="376" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">MLM Head: Dense → GELU → LN → Vocab</text>
+  <text x="320" y="398" text-anchor="middle" font-family="monospace" font-size="11" fill="#FFCDD2">[B, S, V=30000]</text>
+  <!-- arrow down -->
+  <line x1="320" y1="414" x2="320" y2="444" stroke="#C62828" stroke-width="2"/>
+  <polygon points="314,442 320,452 326,442" fill="#C62828"/>
+  <!-- MLM loss -->
+  <rect x="200" y="452" width="240" height="48" rx="6" fill="#C62828" stroke="#FAFAFA" stroke-width="1"/>
+  <text x="320" y="476" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#FAFAFA">MLM Loss (CE)</text>
+  <text x="320" y="494" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCDD2">mean over masked positions</text>
+  <!-- masking strategy box -->
+  <rect x="80" y="530" width="480" height="90" rx="6" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="320" y="554" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#C62828">Masking Strategy (15% of tokens)</text>
+  <text x="320" y="576" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">80% → replace with [MASK]</text>
+  <text x="320" y="594" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">10% → replace with random token    10% → keep unchanged</text>
+  <!-- RIGHT SIDE: NSP -->
+  <text x="920" y="110" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" fill="#C62828">Task 2: Next Sentence Prediction</text>
+  <!-- sentence pair -->
+  <rect x="720" y="140" width="200" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="820" y="164" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">Sentence A [SEP]</text>
+  <rect x="940" y="140" width="200" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="1040" y="164" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">Sentence B</text>
+  <text x="920" y="164" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#C62828">→</text>
+  <!-- NSP labels -->
+  <rect x="780" y="196" width="120" height="28" rx="4" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+  <text x="840" y="216" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#FAFAFA">IsNext 50%</text>
+  <rect x="940" y="196" width="120" height="28" rx="4" fill="#424242" stroke="#C62828" stroke-width="1"/>
+  <text x="1000" y="216" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#FAFAFA">NotNext 50%</text>
+  <!-- arrow down to pooler -->
+  <line x1="920" y1="230" x2="920" y2="260" stroke="#C62828" stroke-width="2"/>
+  <polygon points="914,258 920,268 926,258" fill="#C62828"/>
+  <!-- pooler -->
+  <rect x="820" y="268" width="200" height="50" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="920" y="290" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Pooler: tanh(W·C)</text>
+  <text x="920" y="308" text-anchor="middle" font-family="monospace" font-size="10" fill="#B71C1C">C = [CLS] hidden state</text>
+  <!-- arrow down -->
+  <line x1="920" y1="322" x2="920" y2="352" stroke="#C62828" stroke-width="2"/>
+  <polygon points="914,350 920,360 926,350" fill="#C62828"/>
+  <!-- NSP head -->
+  <rect x="840" y="360" width="160" height="44" rx="6" fill="#B71C1C" stroke="#C62828" stroke-width="1.5"/>
+  <text x="920" y="380" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">NSP Head</text>
+  <text x="920" y="396" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCDD2">Linear → 2</text>
+  <!-- arrow down -->
+  <line x1="920" y1="408" x2="920" y2="438" stroke="#C62828" stroke-width="2"/>
+  <polygon points="914,436 920,446 926,436" fill="#C62828"/>
+  <!-- NSP loss -->
+  <rect x="820" y="446" width="200" height="48" rx="6" fill="#C62828" stroke="#FAFAFA" stroke-width="1"/>
+  <text x="920" y="470" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#FAFAFA">NSP Loss (CE)</text>
+  <text x="920" y="488" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCDD2">binary classification</text>
+  <!-- COMBINED LOSS -->
+  <rect x="440" y="540" width="400" height="70" rx="8" fill="#B71C1C" stroke="#FAFAFA" stroke-width="2" filter="url(#pt-glow)"/>
+  <text x="640" y="570" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" fill="#FAFAFA">Combined Loss = MLM + NSP</text>
+  <text x="640" y="594" text-anchor="middle" font-family="monospace" font-size="12" fill="#FFCDD2">mean(MLM) + mean(NSP) — no weighting</text>
+  <!-- connecting arrows from individual losses to combined -->
+  <line x1="320" y1="502" x2="520" y2="540" stroke="#C62828" stroke-width="2"/>
+  <line x1="920" y1="496" x2="760" y2="540" stroke="#C62828" stroke-width="2"/>
+</svg>

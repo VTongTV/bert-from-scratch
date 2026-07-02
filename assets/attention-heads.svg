@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="attn-red" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <linearGradient id="attn-gray" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="100%" stop-color="#616161"/>
+    </linearGradient>
+    <filter id="attn-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#212121"/>
+  <!-- title -->
+  <rect x="48" y="24" width="1184" height="48" rx="4" fill="#C62828" opacity="0.15"/>
+  <text x="640" y="56" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="bold" fill="#FAFAFA">Multi-Head Attention — H=768 Split into A=12 Heads</text>
+  <!-- legend -->
+  <rect x="48" y="648" width="1184" height="48" rx="4" fill="#424242" opacity="0.4"/>
+  <rect x="72" y="664" width="16" height="16" rx="2" fill="url(#attn-red)"/>
+  <text x="96" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Active data path</text>
+  <rect x="260" y="664" width="16" height="16" rx="2" fill="url(#attn-gray)"/>
+  <text x="284" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Projection weight</text>
+  <text x="500" y="678" font-family="monospace" font-size="12" fill="#C62828">d_k = H/A = 64</text>
+  <!-- input -->
+  <rect x="60" y="260" width="120" height="200" rx="6" fill="#424242" stroke="#616161" stroke-width="1.5"/>
+  <text x="120" y="340" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#FAFAFA">Input</text>
+  <text x="120" y="360" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#C62828">[B, S, 768]</text>
+  <text x="120" y="380" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">H = 768</text>
+  <!-- Q, K, V projections -->
+  <rect x="240" y="180" width="100" height="56" rx="4" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="290" y="204" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">W_Q</text>
+  <text x="290" y="224" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#B71C1C">768→768</text>
+  <rect x="240" y="332" width="100" height="56" rx="4" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="290" y="356" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">W_K</text>
+  <text x="290" y="376" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#B71C1C">768→768</text>
+  <rect x="240" y="484" width="100" height="56" rx="4" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="290" y="508" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">W_V</text>
+  <text x="290" y="528" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#B71C1C">768→768</text>
+  <!-- connectors input to projections -->
+  <line x1="180" y1="320" x2="240" y2="208" stroke="#616161" stroke-width="1.5"/>
+  <line x1="180" y1="360" x2="240" y2="360" stroke="#616161" stroke-width="1.5"/>
+  <line x1="180" y1="400" x2="240" y2="512" stroke="#616161" stroke-width="1.5"/>
+  <!-- split heads label -->
+  <text x="400" y="140" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#C62828">Split into A=12 heads</text>
+  <text x="400" y="160" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">Each head: d_k = 64</text>
+  <!-- 12 head slots - shown as teeth -->
+  <g>
+    <rect x="420" y="180" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="200" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h1</text>
+    <rect x="420" y="216" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="236" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h2</text>
+    <rect x="420" y="252" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="272" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h3</text>
+    <rect x="420" y="288" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="308" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h4</text>
+    <rect x="420" y="324" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="344" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h5</text>
+    <rect x="420" y="360" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="380" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h6</text>
+    <rect x="420" y="396" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="416" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h7</text>
+    <rect x="420" y="432" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="452" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h8</text>
+    <rect x="420" y="468" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="488" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h9</text>
+    <rect x="420" y="504" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="524" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h10</text>
+    <rect x="420" y="540" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="560" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h11</text>
+    <rect x="420" y="576" width="56" height="28" rx="3" fill="#B71C1C" stroke="#C62828" stroke-width="1"/>
+    <text x="448" y="596" text-anchor="middle" font-family="monospace" font-size="10" fill="#FAFAFA">h12</text>
+  </g>
+  <!-- scaled dot-product attention per head -->
+  <rect x="540" y="180" width="200" height="424" rx="6" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="640" y="210" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Scaled Dot-Product</text>
+  <text x="640" y="230" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Attention per Head</text>
+  <text x="640" y="270" text-anchor="middle" font-family="monospace" font-size="11" fill="#C62828">Q·K^T / √d_k</text>
+  <text x="640" y="300" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">softmax</text>
+  <text x="640" y="330" text-anchor="middle" font-family="monospace" font-size="11" fill="#C62828">attn·V</text>
+  <text x="640" y="370" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">Per head output:</text>
+  <text x="640" y="394" text-anchor="middle" font-family="monospace" font-size="12" fill="#C62828">[B, S, d_k=64]</text>
+  <!-- concat -->
+  <rect x="820" y="260" width="140" height="200" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="890" y="340" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#FAFAFA">Concat</text>
+  <text x="890" y="364" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#C62828">[B, S, H]</text>
+  <text x="890" y="388" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">12 × 64 = 768</text>
+  <!-- output projection -->
+  <rect x="1030" y="260" width="120" height="80" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="1090" y="296" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">W_O</text>
+  <text x="1090" y="318" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#B71C1C">768→768</text>
+  <!-- output -->
+  <rect x="1030" y="400" width="120" height="60" rx="6" fill="#B71C1C" stroke="#C62828" stroke-width="1.5"/>
+  <text x="1090" y="426" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Output</text>
+  <text x="1090" y="446" text-anchor="middle" font-family="monospace" font-size="11" fill="#FFCDD2">[B, S, 768]</text>
+  <!-- connectors -->
+  <line x1="340" y1="208" x2="420" y2="200" stroke="#616161" stroke-width="1"/>
+  <line x1="340" y1="208" x2="420" y2="590" stroke="#616161" stroke-width="0.5" stroke-dasharray="2,4"/>
+  <line x1="340" y1="360" x2="420" y2="400" stroke="#616161" stroke-width="1"/>
+  <line x1="340" y1="512" x2="420" y2="400" stroke="#616161" stroke-width="0.5" stroke-dasharray="2,4"/>
+  <line x1="476" y1="400" x2="540" y2="400" stroke="#C62828" stroke-width="1.5"/>
+  <line x1="740" y1="360" x2="820" y2="360" stroke="#C62828" stroke-width="1.5"/>
+  <line x1="960" y1="360" x2="1030" y2="300" stroke="#C62828" stroke-width="1.5"/>
+  <line x1="1090" y1="340" x2="1090" y2="400" stroke="#C62828" stroke-width="1.5"/>
+  <!-- formula -->
+  <text x="890" y="510" text-anchor="middle" font-family="monospace" font-size="13" fill="#FAFAFA">Attention(Q,K,V) = softmax(QK^T / √d_k)·V</text>
+  <text x="890" y="540" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">MultiHead = Concat(head_1,...,head_A)·W_O</text>
+</svg>
