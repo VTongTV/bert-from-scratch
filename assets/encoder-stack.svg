@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="enc-red-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <linearGradient id="enc-dark-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="100%" stop-color="#212121"/>
+    </linearGradient>
+    <filter id="enc-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="enc-text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#212121"/>
+  <!-- title band -->
+  <rect x="48" y="24" width="1184" height="48" rx="4" fill="#C62828" opacity="0.15"/>
+  <text x="640" y="56" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="bold" fill="#FAFAFA">BERT Encoder Stack — L=12 Layers Unroll</text>
+  <!-- legend band -->
+  <rect x="48" y="648" width="1184" height="48" rx="4" fill="#424242" opacity="0.4"/>
+  <rect x="72" y="664" width="16" height="16" rx="2" fill="url(#enc-red-grad)"/>
+  <text x="96" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Active layer (data present)</text>
+  <rect x="280" y="664" width="16" height="16" rx="2" fill="url(#enc-dark-grad)"/>
+  <text x="304" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Inactive layer</text>
+  <circle cx="480" cy="672" r="6" fill="#C62828" filter="url(#enc-glow)"/>
+  <text x="496" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Traveling data token</text>
+  <line x1="680" y1="672" x2="720" y2="672" stroke="#C62828" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="732" y="678" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#FAFAFA">Data path (draw-on)</text>
+  <!-- input embedding block -->
+  <rect x="80" y="100" width="160" height="56" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="160" y="124" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Input Embeddings</text>
+  <text x="160" y="142" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#B71C1C">[B, S, H]</text>
+  <!-- encoder layers - 12 layers in 2 columns of 6 -->
+  <!-- column 1: layers 1-6 -->
+  <rect x="320" y="100" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="390" y="118" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 1</text>
+  <text x="390" y="134" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="320" y="156" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="390" y="174" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 2</text>
+  <text x="390" y="190" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="320" y="212" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="390" y="230" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 3</text>
+  <text x="390" y="246" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="320" y="268" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="390" y="286" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 4</text>
+  <text x="390" y="302" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="320" y="324" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="390" y="342" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 5</text>
+  <text x="390" y="358" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="320" y="380" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="390" y="398" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 6</text>
+  <text x="390" y="414" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <!-- column 2: layers 7-12 -->
+  <rect x="560" y="100" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="630" y="118" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 7</text>
+  <text x="630" y="134" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="560" y="156" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="630" y="174" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 8</text>
+  <text x="630" y="190" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="560" y="212" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="630" y="230" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 9</text>
+  <text x="630" y="246" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="560" y="268" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="630" y="286" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 10</text>
+  <text x="630" y="302" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="560" y="324" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="630" y="342" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 11</text>
+  <text x="630" y="358" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <rect x="560" y="380" width="140" height="44" rx="4" fill="url(#enc-dark-grad)" stroke="#424242" stroke-width="1"/>
+  <text x="630" y="398" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Layer 12</text>
+  <text x="630" y="414" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#616161">Self-Attn + FFN</text>
+  <!-- connector lines (static, drawn in dark) -->
+  <line x1="240" y1="128" x2="320" y2="122" stroke="#424242" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="460" y1="122" x2="560" y2="122" stroke="#424242" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- output blocks -->
+  <rect x="800" y="120" width="160" height="56" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="880" y="144" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Encoder Output</text>
+  <text x="880" y="162" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#B71C1C">[B, S, H]</text>
+  <rect x="800" y="240" width="160" height="56" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="880" y="264" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Pooler (tanh)</text>
+  <text x="880" y="282" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#B71C1C">[B, H]</text>
+  <!-- heads -->
+  <rect x="1040" y="100" width="180" height="44" rx="6" fill="#B71C1C" stroke="#C62828" stroke-width="1.5"/>
+  <text x="1130" y="118" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" fill="#FAFAFA">MLM Head</text>
+  <text x="1130" y="134" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#FFCDD2">Dense→GELU→LN→Vocab</text>
+  <rect x="1040" y="164" width="180" height="44" rx="6" fill="#B71C1C" stroke="#C62828" stroke-width="1.5"/>
+  <text x="1130" y="182" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" fill="#FAFAFA">NSP Head</text>
+  <text x="1130" y="198" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#FFCDD2">Linear→2 classes</text>
+  <!-- loss -->
+  <rect x="1040" y="244" width="180" height="52" rx="6" fill="#C62828" stroke="#FAFAFA" stroke-width="1"/>
+  <text x="1130" y="266" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#FAFAFA">Pre-training Loss</text>
+  <text x="1130" y="284" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#FFCDD2">MLM + NSP</text>
+  <!-- config info box -->
+  <rect x="800" y="380" width="400" height="200" rx="6" fill="#424242" stroke="#616161" stroke-width="1" opacity="0.7"/>
+  <text x="820" y="408" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#C62828">BERT_BASE Config</text>
+  <text x="820" y="432" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">L = 12 layers</text>
+  <text x="820" y="452" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">H = 768 hidden size</text>
+  <text x="820" y="472" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">A = 12 attention heads</text>
+  <text x="820" y="492" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">d_ff = 3072 (4 × H)</text>
+  <text x="820" y="512" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">V = 30,000 WordPiece vocab</text>
+  <text x="820" y="532" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">max_len = 512 tokens</text>
+  <text x="820" y="556" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#FAFAFA">Parameters: ~110M</text>
+  <!-- connector from output to pooler -->
+  <line x1="880" y1="176" x2="880" y2="240" stroke="#616161" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- connector from encoder to MLM -->
+  <line x1="960" y1="148" x2="1040" y2="122" stroke="#616161" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- connector from pooler to NSP -->
+  <line x1="960" y1="268" x2="1040" y2="186" stroke="#616161" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- connectors from heads to loss -->
+  <line x1="1130" y1="208" x2="1130" y2="244" stroke="#C62828" stroke-width="1.5"/>
+  <line x1="1130" y1="296" x2="1130" y2="310" stroke="#C62828" stroke-width="1.5"/>
+  <!-- BERT_LARGE note -->
+  <text x="820" y="568" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">BERT_LARGE: L=24, H=1024, A=16, ~340M params</text>
+</svg>
