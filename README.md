@@ -21,7 +21,7 @@ assets/              architecture and results diagrams
 
 BERT takes token + segment + position embeddings, passes them through L transformer encoder layers, and produces contextual representations for every token. A pooler extracts the [CLS] representation for classification tasks.
 
-<img src="assets/encoder-stack.svg" alt="BERT encoder stack architecture — 12 layers unrolling from input embeddings through encoder to MLM and NSP heads" width="100%">
+<img src="assets/encoder-cascade.svg" alt="BERT encoder cascade — 12 layers construct in sequence as data flows through" width="100%">
 
 **Model configurations:**
 
@@ -36,7 +36,7 @@ Input representation: `[CLS] token_A [SEP] token_B [SEP]` with segment IDs and p
 
 Each encoder layer splits the hidden state into A attention heads. Each head computes scaled dot-product attention independently. The heads concatenate and project back to H.
 
-<img src="assets/attention-heads.svg" alt="Multi-head attention mechanism — H=768 split into A=12 heads of d_k=64 each" width="100%">
+<img src="assets/attention-chain.svg" alt="Multi-head attention — 12 heads engage like chainsaw teeth around the drive sprocket" width="100%">
 
 Formula: `Attention(Q,K,V) = softmax(QK^T / √d_k) · V` where `d_k = H/A = 64`.
 
@@ -46,7 +46,7 @@ Each encoder layer: multi-head attention → residual + LayerNorm → feed-forwa
 
 BERT uses two pre-training objectives on unlabeled text. The combined loss is the unweighted sum of mean MLM loss and mean NSP loss.
 
-<img src="assets/pretraining-pipeline.svg" alt="Pre-training pipeline — MLM masks 15% of tokens, NSP predicts sentence adjacency, combined loss = MLM + NSP" width="100%">
+<img src="assets/masking-scatter.svg" alt="MLM masking — 15% of tokens scatter into three replacement groups (80/10/10)" width="100%">
 
 **Task 1 — Masked Language Modeling (MLM):** Mask 15% of WordPiece tokens. Of those, 80% get replaced with `[M]`, 10% get a random token, and 10% stay unchanged. The MLM head predicts the original tokens at masked positions. Loss is cross-entropy, averaged over masked positions only.
 
@@ -70,7 +70,7 @@ BERT uses two pre-training objectives on unlabeled text. The combined loss is th
 
 After pre-training, you add a task-specific head on top of BERT and fine-tune all parameters end-to-end. The encoder weights are the same across tasks — only the head changes.
 
-<img src="assets/finetuning-heads.svg" alt="Fine-tuning heads — same BERT encoder feeds GLUE, SQuAD, and SWAG task heads with paper results" width="100%">
+<img src="assets/training-cut.svg" alt="Training loss — blade cuts through steps as MLM and NSP loss curves draw on" width="100%">
 
 ### GLUE
 
@@ -122,15 +122,13 @@ Hyperparameters: batch=16, lr=2e-5, 3 epochs.
 
 The paper runs controlled experiments to measure the contribution of each design choice.
 
-<img src="assets/ablation-results.svg" alt="Ablation results — task ablation and masking strategy tables from the paper" width="100%">
+<img src="assets/ablation-split.svg" alt="Ablation variants split from BERT — No NSP, LTR, LTR+BiLSTM, masking strategies, model sizes" width="100%">
 
 ### Pre-Training Tasks (Table 6)
 
 Removing NSP hurts QNLI by 3.5 points. Switching from bidirectional MLM to left-to-right (LTR) hurts SQuAD by 10.7 F1 points. Adding a BiLSTM on top of LTR helps SQuAD (+7.1 F1) but hurts GLUE tasks.
 
 ### Model Size (Table 7)
-
-<img src="assets/model-size-ablation.svg" alt="Model size ablation — accuracy improves monotonically with scale across all tasks" width="100%">
 
 Larger models improve accuracy on all tasks, including MRPC which has only 3,600 training examples. LM perplexity drops monotonically from 5.84 (L=3) to 3.23 (L=24, H=1024, A=16).
 

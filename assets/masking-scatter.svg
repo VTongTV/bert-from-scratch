@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <filter id="ms-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#1A1A1A"/>
+  <!-- title -->
+  <rect x="48" y="16" width="1184" height="44" rx="4" fill="#212121"/>
+  <text x="640" y="46" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="bold" fill="#E8E8E8">MLM Masking — Token Scatter (15%)</text>
+  <!-- legend -->
+  <rect x="48" y="664" width="1184" height="40" rx="4" fill="#212121"/>
+  <rect x="72" y="676" width="16" height="16" rx="2" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="96" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Unselected</text>
+  <rect x="200" y="676" width="16" height="16" rx="2" fill="#C62828"/>
+  <text x="224" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Selected (15%)</text>
+  <rect x="380" y="676" width="16" height="16" rx="2" fill="#B71C1C"/>
+  <text x="404" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">→ [M] (80%)</text>
+  <rect x="520" y="676" width="16" height="16" rx="2" fill="#FF8A65"/>
+  <text x="544" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">→ random (10%)</text>
+  <rect x="680" y="676" width="16" height="16" rx="2" fill="#9E9E9E"/>
+  <text x="704" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">→ same (10%)</text>
+
+  <!-- ===== STAGE 1: Full token row ===== -->
+  <text x="80" y="120" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#E8E8E8">1. Input tokens</text>
+  <!-- 20 token slots -->
+  <g id="ms-tokens">
+    <rect id="ms-t0" x="80" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="102" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">the</text>
+    <rect id="ms-t1" x="132" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="154" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">man</text>
+    <rect id="ms-t2" x="184" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="206" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">went</text>
+    <rect id="ms-t3" x="236" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="258" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">to</text>
+    <rect id="ms-t4" x="288" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="310" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">the</text>
+    <rect id="ms-t5" x="340" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="362" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">store</text>
+    <rect id="ms-t6" x="392" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="414" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">and</text>
+    <rect id="ms-t7" x="444" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="466" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">bought</text>
+    <rect id="ms-t8" x="496" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="518" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">some</text>
+    <rect id="ms-t9" x="548" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="570" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">food</text>
+    <!-- 10 more tokens -->
+    <rect id="ms-t10" x="600" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="622" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">for</text>
+    <rect id="ms-t11" x="652" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="674" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">his</text>
+    <rect id="ms-t12" x="704" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="726" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">dog</text>
+    <rect id="ms-t13" x="756" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="778" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">at</text>
+    <rect id="ms-t14" x="808" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="830" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">the</text>
+    <rect id="ms-t15" x="860" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="882" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">park</text>
+    <rect id="ms-t16" x="912" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="934" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">yes</text>
+    <rect id="ms-t17" x="964" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="986" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">ter</text>
+    <rect id="ms-t18" x="1016" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="1038" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">day</text>
+    <rect id="ms-t19" x="1068" y="136" width="44" height="36" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+    <text x="1090" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#E8E8E8">now</text>
+  </g>
+
+  <!-- ===== STAGE 2: Selected tokens fly apart (scatter) ===== -->
+  <text x="80" y="280" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#E8E8E8">2. 15% selected → scatter</text>
+  <!-- 3 selected tokens (indices 1, 5, 9 = 15% of 20) scatter downward into three groups -->
+  <!-- Scatter path for t1 → [M] group -->
+  <path id="ms-scatter1" d="M154,172 L280,400" fill="none" stroke="#C62828" stroke-width="2" pathLength="100" stroke-dasharray="100"/>
+  <!-- Scatter path for t5 → random group -->
+  <path id="ms-scatter2" d="M362,172 L560,400" fill="none" stroke="#FF8A65" stroke-width="2" pathLength="100" stroke-dasharray="100"/>
+  <!-- Scatter path for t9 → same group -->
+  <path id="ms-scatter3" d="M570,172 L840,400" fill="none" stroke="#9E9E9E" stroke-width="2" pathLength="100" stroke-dasharray="100"/>
+
+  <!-- Scatter draw-ons -->
+  <animate attributeName="stroke-dashoffset" href="#ms-scatter1" values="100;0;0;100" keyTimes="0;0.3;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-dashoffset" href="#ms-scatter2" values="100;0;0;100" keyTimes="0;0.35;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-dashoffset" href="#ms-scatter3" values="100;0;0;100" keyTimes="0;0.4;0.7;1" dur="8s" repeatCount="indefinite"/>
+
+  <!-- ===== STAGE 3: Three outcome groups ===== -->
+  <!-- [M] group (80%) -->
+  <rect x="220" y="400" width="120" height="180" rx="8" fill="#B71C1C" stroke="#C62828" stroke-width="2">
+    <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.35;0.7;1" dur="8s" repeatCount="indefinite" additive="sum"/>
+  </rect>
+  <text x="280" y="460" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" fill="#E8E8E8">80% [M]</text>
+  <text x="280" y="486" text-anchor="middle" font-family="monospace" font-size="11" fill="#FFCDD2">→ predict</text>
+  <text x="280" y="506" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#FFCDD2">Replace with</text>
+  <text x="280" y="524" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#E8E8E8">[MASK]</text>
+  <text x="280" y="556" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">~12% of all tokens</text>
+
+  <!-- Random group (10%) -->
+  <rect x="500" y="400" width="120" height="180" rx="8" fill="#424242" stroke="#FF8A65" stroke-width="2">
+    <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.4;0.7;1" dur="8s" repeatCount="indefinite" additive="sum"/>
+  </rect>
+  <text x="560" y="460" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" fill="#E8E8E8">10% rand</text>
+  <text x="560" y="486" text-anchor="middle" font-family="monospace" font-size="11" fill="#FF8A65">→ predict</text>
+  <text x="560" y="506" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#FF8A65">Replace with</text>
+  <text x="560" y="524" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#E8E8E8">random</text>
+  <text x="560" y="556" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">~1.5% of all tokens</text>
+
+  <!-- Same group (10%) -->
+  <rect x="780" y="400" width="120" height="180" rx="8" fill="#424242" stroke="#9E9E9E" stroke-width="2">
+    <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.45;0.7;1" dur="8s" repeatCount="indefinite" additive="sum"/>
+  </rect>
+  <text x="840" y="460" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" fill="#E8E8E8">10% same</text>
+  <text x="840" y="486" text-anchor="middle" font-family="monospace" font-size="11" fill="#9E9E9E">→ predict</text>
+  <text x="840" y="506" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">Keep</text>
+  <text x="840" y="524" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#E8E8E8">unchanged</text>
+  <text x="840" y="556" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">~1.5% of all tokens</text>
+
+  <!-- ===== SPLATTER PARTICLES ===== -->
+  <!-- Small circles that fly outward from the selection point -->
+  <circle cx="0" cy="0" r="3" fill="#C62828" opacity="0">
+    <animateMotion dur="8s" repeatCount="indefinite" path="M154,172 L120,350 L154,172" keyTimes="0;0.25;1" keyPoints="0;1;0" calcMode="linear"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.2;0.5;0.7" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="0" cy="0" r="2" fill="#B71C1C" opacity="0">
+    <animateMotion dur="8s" repeatCount="indefinite" path="M362,172 L400,320 L362,172" keyTimes="0;0.25;1" keyPoints="0;1;0" calcMode="linear"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.22;0.5;0.7" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="0" cy="0" r="4" fill="#FF5252" opacity="0">
+    <animateMotion dur="8s" repeatCount="indefinite" path="M570,172 L640,360 L570,172" keyTimes="0;0.25;1" keyPoints="0;1;0" calcMode="linear"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.25;0.55;0.7" dur="8s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ===== Selected token highlights (stroke changes when selected) ===== -->
+  <!-- t1, t5, t9 get a red stroke when selected -->
+  <animate attributeName="stroke" href="#ms-t1" values="#616161;#C62828;#C62828;#616161" keyTimes="0;0.15;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke" href="#ms-t5" values="#616161;#C62828;#C62828;#616161" keyTimes="0;0.15;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke" href="#ms-t9" values="#616161;#C62828;#C62828;#616161" keyTimes="0;0.15;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-width" href="#ms-t1" values="1;2;2;1" keyTimes="0;0.15;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-width" href="#ms-t5" values="1;2;2;1" keyTimes="0;0.15;0.7;1" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-width" href="#ms-t9" values="1;2;2;1" keyTimes="0;0.15;0.7;1" dur="8s" repeatCount="indefinite"/>
+</svg>

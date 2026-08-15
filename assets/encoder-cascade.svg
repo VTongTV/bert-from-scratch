@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="ec-ignite-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <filter id="ec-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="ec-soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- background -->
+  <rect width="1280" height="720" fill="#1A1A1A"/>
+  <!-- title band -->
+  <rect x="48" y="16" width="1184" height="44" rx="4" fill="#212121"/>
+  <text x="640" y="46" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="bold" fill="#E8E8E8">BERT Encoder — Layer Cascade (L=12)</text>
+  <!-- legend band -->
+  <rect x="48" y="664" width="1184" height="40" rx="4" fill="#212121"/>
+  <circle cx="80" cy="684" r="5" fill="#C62828" filter="url(#ec-soft-glow)"/>
+  <text x="96" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Data token</text>
+  <rect x="200" y="676" width="16" height="16" rx="2" fill="url(#ec-ignite-grad)"/>
+  <text x="224" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Active layer</text>
+  <text x="520" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Ripcord pulls, layers construct in cascade</text>
+
+  <!-- ===== INPUT BLOCK ===== -->
+  <rect x="56" y="280" width="96" height="160" rx="8" fill="#424242" stroke="#616161" stroke-width="1.5"/>
+  <text x="104" y="340" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">Input</text>
+  <text x="104" y="360" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">[B, S, H]</text>
+  <text x="104" y="380" text-anchor="middle" font-family="monospace" font-size="10" fill="#C62828">H=768</text>
+
+  <!-- ===== RIPCORD ===== -->
+  <rect id="ec-cord-handle" x="152" y="348" width="32" height="24" rx="4" fill="#C62828" stroke="#E8E8E8" stroke-width="1.5"/>
+  <line id="ec-cord-line" x1="184" y1="360" x2="232" y2="360" stroke="#C62828" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- ===== DATA PATH ===== -->
+  <path id="ec-data-path" d="M152,360 L1200,360" fill="none" stroke="#424242" stroke-width="2" stroke-dasharray="6,4" pathLength="100"/>
+
+  <!-- ===== 12 ENCODER LAYERS — each is a construct archetype ===== -->
+  <!-- Layer rects are inside translated wrappers so scaleY scales from center -->
+  <!-- Labels are OUTSIDE the animated wrapper so they stay still -->
+  <!-- Timing: 10s cycle. Cord pulls at t=0.5s. Token travels 0.5s–8.5s. Each layer constructs when token arrives. -->
+
+  <!-- L1 x=232 cx=268 -->
+  <g>
+    <g transform="translate(268,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.1;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="268" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L1</text>
+  </g>
+
+  <!-- L2 x=312 cx=348 -->
+  <g>
+    <g transform="translate(348,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.152;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="348" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L2</text>
+  </g>
+
+  <!-- L3 x=392 cx=428 -->
+  <g>
+    <g transform="translate(428,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.215;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="428" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L3</text>
+  </g>
+
+  <!-- L4 x=472 cx=508 -->
+  <g>
+    <g transform="translate(508,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.277;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="508" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L4</text>
+  </g>
+
+  <!-- L5 x=552 cx=588 -->
+  <g>
+    <g transform="translate(588,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.34;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="588" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L5</text>
+  </g>
+
+  <!-- L6 x=632 cx=668 -->
+  <g>
+    <g transform="translate(668,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.402;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="668" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L6</text>
+  </g>
+
+  <!-- L7 x=712 cx=748 -->
+  <g>
+    <g transform="translate(748,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.465;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="748" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L7</text>
+  </g>
+
+  <!-- L8 x=792 cx=828 -->
+  <g>
+    <g transform="translate(828,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.527;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="828" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L8</text>
+  </g>
+
+  <!-- L9 x=872 cx=908 -->
+  <g>
+    <g transform="translate(908,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.59;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="908" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L9</text>
+  </g>
+
+  <!-- L10 x=952 cx=988 -->
+  <g>
+    <g transform="translate(988,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.652;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="988" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L10</text>
+  </g>
+
+  <!-- L11 x=1032 cx=1068 -->
+  <g>
+    <g transform="translate(1068,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.715;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="1068" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L11</text>
+  </g>
+
+  <!-- L12 x=1112 cx=1148 -->
+  <g>
+    <g transform="translate(1148,360)">
+      <rect x="-36" y="-140" width="72" height="280" rx="4" fill="url(#ec-ignite-grad)" stroke="#C62828" stroke-width="1.5">
+        <animateTransform attributeName="transform" type="scale" values="1,0;1,1;1,1;1,0" keyTimes="0;0.777;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="1148" y="260" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#9E9E9E">L12</text>
+  </g>
+
+  <!-- ===== OUTPUT ===== -->
+  <rect x="1204" y="260" width="56" height="80" rx="4" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="1232" y="296" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" fill="#E8E8E8">Out</text>
+  <text x="1232" y="312" text-anchor="middle" font-family="monospace" font-size="9" fill="#C62828">[B,S,H]</text>
+
+  <!-- ===== ANIMATIONS ===== -->
+
+  <!-- ANIM 1: Ripcord pull — handle translates right then back -->
+  <animateTransform xlink:href="#ec-cord-handle" attributeName="transform" type="translate" values="0,0;48,0;48,0;0,0" keyTimes="0;0.1;0.85;1" dur="10s" repeatCount="indefinite"/>
+
+  <!-- ANIM 2: Cord line stretches with the handle -->
+  <animate attributeName="x1" href="#ec-cord-line" values="184;232;232;184" keyTimes="0;0.1;0.85;1" dur="10s" repeatCount="indefinite"/>
+
+  <!-- ANIM 3: Data path draws on as the ripcord pulls (fan-out draw-on) -->
+  <animate attributeName="stroke-dashoffset" href="#ec-data-path" values="100;0;0;100" keyTimes="0;0.15;0.85;1" dur="10s" repeatCount="indefinite"/>
+
+  <!-- ANIM 4: Data token travels along the path (traveling packet) -->
+  <circle id="ec-token" cx="152" cy="360" r="8" fill="#C62828" filter="url(#ec-soft-glow)" opacity="0.6"/>
+  <animateMotion href="#ec-token" dur="10s" repeatCount="indefinite" keyPoints="0;0;0.9;0.9;0" keyTimes="0;0.1;0.85;0.9;1" calcMode="linear">
+    <mpath href="#ec-data-path"/>
+  </animateMotion>
+  <!-- Token opacity envelope -->
+  <animate attributeName="opacity" href="#ec-token" values="0.3;1;1;0.3" keyTimes="0;0.1;0.85;1" dur="10s" repeatCount="indefinite"/>
+</svg>

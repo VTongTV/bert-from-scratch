@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="ac-head-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <filter id="ac-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#1A1A1A"/>
+  <!-- title -->
+  <rect x="48" y="16" width="1184" height="44" rx="4" fill="#212121"/>
+  <text x="640" y="46" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="bold" fill="#E8E8E8">Multi-Head Attention — Chain Rotation (A=12)</text>
+  <!-- legend -->
+  <rect x="48" y="664" width="1184" height="40" rx="4" fill="#212121"/>
+  <circle cx="80" cy="684" r="5" fill="#C62828" filter="url(#ac-glow)"/>
+  <text x="96" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Data token</text>
+  <rect x="200" y="676" width="16" height="16" rx="2" fill="url(#ac-head-grad)"/>
+  <text x="224" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Active head</text>
+  <text x="400" y="689" font-family="monospace" font-size="12" fill="#C62828">d_k = H/A = 64</text>
+
+  <!-- ===== INPUT ===== -->
+  <rect x="56" y="300" width="100" height="120" rx="8" fill="#424242" stroke="#616161" stroke-width="1.5"/>
+  <text x="106" y="350" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">Input</text>
+  <text x="106" y="370" text-anchor="middle" font-family="monospace" font-size="10" fill="#C62828">[B,S,768]</text>
+
+  <!-- ===== Q, K, V PROJECTIONS ===== -->
+  <rect x="220" y="160" width="88" height="48" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="264" y="182" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">W_Q</text>
+  <text x="264" y="198" text-anchor="middle" font-family="monospace" font-size="9" fill="#B71C1C">768→768</text>
+  <rect x="220" y="336" width="88" height="48" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="264" y="358" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">W_K</text>
+  <text x="264" y="374" text-anchor="middle" font-family="monospace" font-size="9" fill="#B71C1C">768→768</text>
+  <rect x="220" y="512" width="88" height="48" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="264" y="534" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">W_V</text>
+  <text x="264" y="550" text-anchor="middle" font-family="monospace" font-size="9" fill="#B71C1C">768→768</text>
+
+  <!-- connectors input to projections -->
+  <line x1="156" y1="340" x2="220" y2="184" stroke="#424242" stroke-width="1.5"/>
+  <line x1="156" y1="360" x2="220" y2="360" stroke="#424242" stroke-width="1.5"/>
+  <line x1="156" y1="380" x2="220" y2="536" stroke="#424242" stroke-width="1.5"/>
+
+  <!-- ===== SPROCKET (split point) ===== -->
+  <circle cx="380" cy="184" r="24" fill="none" stroke="#616161" stroke-width="2"/>
+  <circle cx="380" cy="184" r="8" fill="#C62828" filter="url(#ac-glow)"/>
+  <text x="380" y="145" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" fill="#E8E8E8">Split</text>
+  <text x="380" y="130" text-anchor="middle" font-family="monospace" font-size="10" fill="#9E9E9E">768 → 12×64</text>
+
+  <!-- ===== 12 ATTENTION HEADS as chain teeth ===== -->
+  <!-- Arranged in an arc below the sprocket, like teeth on a chainsaw chain -->
+  <!-- Each head is a small rect with a triangular top (tooth shape) -->
+  <!-- Staggered along the chain path -->
+
+  <!-- Fan-out paths from sprocket to each head (draw-on) -->
+  <path id="ac-fan1" d="M380,208 L440,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan2" d="M380,208 L496,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan3" d="M380,208 L552,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan4" d="M380,208 L608,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan5" d="M380,208 L664,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan6" d="M380,208 L720,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan7" d="M380,208 L776,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan8" d="M380,208 L832,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan9" d="M380,208 L888,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan10" d="M380,208 L944,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan11" d="M380,208 L1000,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+  <path id="ac-fan12" d="M380,208 L1056,280" fill="none" stroke="#C62828" stroke-width="1.5" pathLength="100" stroke-dasharray="100"/>
+
+  <!-- Head blocks (chain teeth) -->
+  <rect x="420" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="440" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h1</text>
+  <rect x="476" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="496" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h2</text>
+  <rect x="532" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="552" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h3</text>
+  <rect x="588" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="608" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h4</text>
+  <rect x="644" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="664" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h5</text>
+  <rect x="700" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="720" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h6</text>
+  <rect x="756" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="776" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h7</text>
+  <rect x="812" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="832" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h8</text>
+  <rect x="868" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="888" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h9</text>
+  <rect x="924" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="944" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h10</text>
+  <rect x="980" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="1000" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h11</text>
+  <rect x="1036" y="284" width="40" height="72" rx="4" fill="url(#ac-head-grad)" stroke="#C62828" stroke-width="1"/>
+  <text x="1056" y="316" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#E8E8E8">h12</text>
+
+  <!-- Concat block -->
+  <rect x="420" y="420" width="656" height="56" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="748" y="448" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#E8E8E8">Concat → [B, S, 768]</text>
+  <text x="748" y="466" text-anchor="middle" font-family="monospace" font-size="10" fill="#9E9E9E">12 × d_k = 12 × 64 = 768</text>
+
+  <!-- Output projection -->
+  <rect x="1120" y="300" width="100" height="56" rx="6" fill="#424242" stroke="#C62828" stroke-width="1.5"/>
+  <text x="1170" y="326" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">W_O</text>
+  <text x="1170" y="344" text-anchor="middle" font-family="monospace" font-size="9" fill="#B71C1C">768→768</text>
+
+  <!-- Output block -->
+  <rect x="1120" y="420" width="100" height="56" rx="6" fill="#B71C1C" stroke="#C62828" stroke-width="1.5"/>
+  <text x="1170" y="448" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" fill="#E8E8E8">Output</text>
+  <text x="1170" y="466" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCDD2">[B, S, 768]</text>
+
+  <!-- Path from concat to W_O -->
+  <path id="ac-concat-path" d="M1076,448 L1120,348" fill="none" stroke="#424242" stroke-width="2" pathLength="100" stroke-dasharray="100"/>
+  <!-- Path from W_O to Output -->
+  <path id="ac-output-path" d="M1170,356 L1170,420" fill="none" stroke="#424242" stroke-width="2" pathLength="100" stroke-dasharray="100"/>
+
+  <!-- ===== ANIMATIONS ===== -->
+
+  <!-- ANIM 1: Fan-out draw-on — each head connection draws in sequence (0.3s stagger) -->
+  <!-- 8s cycle, first draw starts at 0.5s, each takes 1s to draw, stagger 0.3s -->
+  <animate attributeName="stroke-dashoffset" href="#ac-fan1" values="100;0;0;100" keyTimes="0;0.0625;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan2" values="100;0;0;100" keyTimes="0;0.1;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan3" values="100;0;0;100" keyTimes="0;0.1375;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan4" values="100;0;0;100" keyTimes="0;0.175;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan5" values="100;0;0;100" keyTimes="0;0.2125;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan6" values="100;0;0;100" keyTimes="0;0.25;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan7" values="100;0;0;100" keyTimes="0;0.2875;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan8" values="100;0;0;100" keyTimes="0;0.325;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan9" values="100;0;0;100" keyTimes="0;0.3625;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan10" values="100;0;0;100" keyTimes="0;0.4;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan11" values="100;0;0;100" keyTimes="0;0.4375;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="stroke-dashoffset" href="#ac-fan12" values="100;0;0;100" keyTimes="0;0.475;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+
+  <!-- ANIM 2: Concat path draws on after all heads engaged -->
+  <animate attributeName="stroke-dashoffset" href="#ac-concat-path" values="100;0;0;100" keyTimes="0;0.5;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+  <!-- ANIM 3: Output path draws on after concat -->
+  <animate attributeName="stroke-dashoffset" href="#ac-output-path" values="100;0;0;100" keyTimes="0;0.6;0.8;1" dur="8s" repeatCount="indefinite" begin="0s"/>
+
+  <!-- ANIM 4: Traveling packet along concat path -->
+  <circle id="ac-packet" cx="0" cy="0" r="6" fill="#C62828" filter="url(#ac-glow)" opacity="0"/>
+  <animateMotion href="#ac-packet" dur="8s" repeatCount="indefinite" keyPoints="0;0;0.85;0.85;1" keyTimes="0;0.5;0.75;0.8;1" calcMode="linear">
+    <mpath href="#ac-concat-path"/>
+  </animateMotion>
+  <animate attributeName="opacity" href="#ac-packet" values="0;1;1;0" keyTimes="0;0.5;0.75;0.85" dur="8s" repeatCount="indefinite"/>
+
+  <!-- ANIM 5: Chain rotation — the sprocket center rotates, visually suggesting the chain is turning -->
+  <g transform="translate(380,184)">
+    <circle r="16" fill="none" stroke="#616161" stroke-width="1" stroke-dasharray="4,4">
+      <animateTransform attributeName="transform" type="rotate" values="0;360" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="tc-blade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#616161"/>
+      <stop offset="60%" stop-color="#9E9E9E"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+    <clipPath id="tc-chart-clip">
+      <rect x="120" y="80" width="1040" height="480"/>
+    </clipPath>
+    <filter id="tc-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#1A1A1A"/>
+  <!-- title -->
+  <rect x="48" y="16" width="1184" height="44" rx="4" fill="#212121"/>
+  <text x="640" y="46" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="bold" fill="#E8E8E8">Pre-training Loss — Blade Cuts Through Steps</text>
+  <!-- legend -->
+  <rect x="48" y="664" width="1184" height="40" rx="4" fill="#212121"/>
+  <rect x="72" y="676" width="40" height="12" rx="2" fill="url(#tc-blade)"/>
+  <text x="120" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Blade (training step)</text>
+  <line x1="260" y1="682" x2="320" y2="682" stroke="#C62828" stroke-width="2"/>
+  <text x="328" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">Loss curve</text>
+  <rect x="480" y="676" width="16" height="16" rx="2" fill="#424242" stroke="#616161" stroke-width="1"/>
+  <text x="504" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">MLM loss</text>
+  <rect x="620" y="676" width="16" height="16" rx="2" fill="#616161" stroke="#9E9E9E" stroke-width="1"/>
+  <text x="644" y="689" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9E9E9E">NSP loss</text>
+
+  <!-- ===== CHART AREA ===== -->
+  <!-- Axes -->
+  <line x1="120" y1="560" x2="1160" y2="560" stroke="#424242" stroke-width="2"/>
+  <line x1="120" y1="80" x2="120" y2="560" stroke="#424242" stroke-width="2"/>
+  <!-- Axis labels -->
+  <text x="640" y="600" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#9E9E9E">Training Steps (0 → 1M)</text>
+  <text x="60" y="320" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#9E9E9E" transform="rotate(-90,60,320)">Loss</text>
+  <!-- Grid lines -->
+  <line x1="120" y1="200" x2="1160" y2="200" stroke="#2A2A2A" stroke-width="1"/>
+  <line x1="120" y1="340" x2="1160" y2="340" stroke="#2A2A2A" stroke-width="1"/>
+  <line x1="120" y1="480" x2="1160" y2="480" stroke="#2A2A2A" stroke-width="1"/>
+  <!-- Tick labels -->
+  <text x="116" y="575" text-anchor="end" font-family="monospace" font-size="10" fill="#616161">0</text>
+  <text x="370" y="575" text-anchor="middle" font-family="monospace" font-size="10" fill="#616161">250k</text>
+  <text x="640" y="575" text-anchor="middle" font-family="monospace" font-size="10" fill="#616161">500k</text>
+  <text x="900" y="575" text-anchor="middle" font-family="monospace" font-size="10" fill="#616161">750k</text>
+  <text x="1160" y="575" text-anchor="middle" font-family="monospace" font-size="10" fill="#616161">1M</text>
+
+  <!-- ===== MLM LOSS CURVE (accumulation) ===== -->
+  <!-- A path that draws itself left to right as the blade advances -->
+  <!-- Exponential decay shape: starts at ~10, decays to ~2 -->
+  <path id="tc-mlm-path" d="M120,140 C250,280 400,380 640,440 C800,470 1000,490 1160,500" fill="none" stroke="#C62828" stroke-width="2.5" pathLength="100" stroke-dasharray="100" clip-path="url(#tc-chart-clip)"/>
+
+  <!-- NSP LOSS CURVE -->
+  <path id="tc-nsp-path" d="M120,200 C300,350 500,430 700,460 C900,475 1050,485 1160,490" fill="none" stroke="#9E9E9E" stroke-width="1.5" pathLength="100" stroke-dasharray="100" clip-path="url(#tc-chart-clip)"/>
+
+  <!-- ===== CHAINSAW BLADE (translates right across the chart) ===== -->
+  <g id="tc-blade-group">
+    <!-- Blade body -->
+    <rect x="-20" y="548" width="80" height="16" rx="3" fill="url(#tc-blade)" stroke="#424242" stroke-width="1"/>
+    <!-- Blade teeth (triangles on top) -->
+    <polygon points="-10,548 0,540 10,548" fill="#9E9E9E"/>
+    <polygon points="10,548 20,540 30,548" fill="#9E9E9E"/>
+    <polygon points="30,548 40,540 50,548" fill="#9E9E9E"/>
+    <!-- Handle -->
+    <rect x="-40" y="550" width="24" height="12" rx="3" fill="#B71C1C" stroke="#E8E8E8" stroke-width="1"/>
+    <animateTransform attributeName="transform" type="translate" values="120,0;1160,0;1160,0;120,0" keyTimes="0;0.8;0.85;1" dur="10s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- ===== ACCUMULATION: LOSS CURVES DRAW ON ===== -->
+  <animate attributeName="stroke-dashoffset" href="#tc-mlm-path" values="100;0;0;100" keyTimes="0;0.8;0.85;1" dur="10s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-dashoffset" href="#tc-nsp-path" values="100;0;0;100" keyTimes="0;0.8;0.85;1" dur="10s" repeatCount="indefinite"/>
+
+  <!-- ===== WARMUP / DECAY ANNOTATION ===== -->
+  <!-- Warmup zone -->
+  <rect x="120" y="80" width="104" height="480" fill="#C62828" opacity="0.05">
+    <animate attributeName="opacity" values="0;0.05;0.05;0" keyTimes="0;0.1;0.8;1" dur="10s" repeatCount="indefinite"/>
+  </rect>
+  <text x="172" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">Warmup</text>
+  <text x="172" y="116" text-anchor="middle" font-family="monospace" font-size="10" fill="#616161">10k steps</text>
+
+  <!-- Linear decay label -->
+  <text x="800" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" fill="#9E9E9E">Linear LR Decay</text>
+  <text x="800" y="116" text-anchor="middle" font-family="monospace" font-size="10" fill="#616161">lr: 1e-4 → 0</text>
+
+  <!-- ===== METRIC BARS (accumulate from baseline) ===== -->
+  <!-- Final loss values shown as bars at the right side -->
+  <g transform="translate(1180,0)">
+    <!-- MLM bar -->
+    <g transform="translate(0,500)">
+      <rect x="0" y="0" width="28" height="0" rx="2" fill="#C62828">
+        <animate attributeName="height" values="0;60;60;0" keyTimes="0;0.8;0.85;1" dur="10s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="0;-60;-60;0" keyTimes="0;0.8;0.85;1" dur="10s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <text x="14" y="530" text-anchor="middle" font-family="monospace" font-size="9" fill="#C62828">MLM</text>
+  </g>
+</svg>
